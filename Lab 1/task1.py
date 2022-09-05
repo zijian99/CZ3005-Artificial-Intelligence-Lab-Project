@@ -8,29 +8,36 @@
 
 def UCSTask1(start,end,G,Dist,ECost):
 
-    #priority queue
-    #[Total distance from start to current node,Energy cost of the node,Parent node index,Current Node index]
+    # Priority queue
+    # The priority queue contains arrays that store information regarding a node:
+    # - Total distance from start to the node
+    # - Energy cost of the node (Always 0 for Task 1)
+    # - Parent node index
+    # - Current node index
     queue=[[0,0,-1,start]]
-    #shortest path memory
+    
+    # Shortest path memory: Stores the shortest path
     path=[]
-    #visited node
+   
+    # Visited nodes: Stores the index of the visited nodes
     visited=[]
 
     while(len(queue)>0):
-        
+
         queue = sorted(queue,key=lambda x:x[0])
         tt_dist,cost,parent_node,cur_node = queue.pop()
         #save path
+
         path.append([tt_dist,cost,parent_node,cur_node])
-        tt_dist *= -1
         
         if cur_node in visited:
             continue
         #------------------------------------------------------------------
-        if(cur_node==end):
+        # Goal reached:
+        if(cur_node==end): 
+            pathString=end # String to store the path
 
-            pathString=end
-
+            # Start back tracking steps from end node and build the path string:
             for i in range (len(path)-1,-1,-1):
                 if path[i][3] == parent_node:
                     # String format= parent node+parent node +......+end
@@ -39,6 +46,7 @@ def UCSTask1(start,end,G,Dist,ECost):
 
             #Write answer to txt file
             with open('Lab 1\Task1_Output.txt', 'w') as f:
+
                 print('[ Task 1 ] Uniform Cost Search without Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
                 print("Shortest distance: {}".format(tt_dist) +"\n")
@@ -50,20 +58,20 @@ def UCSTask1(start,end,G,Dist,ECost):
             
             return
         #-----------------------------------------------------------------
-        
-
+        #Goal not yet reached:
         visited.append(cur_node)
-        
+
+        # Check all neighours of cur_node: 
         for i in range (len(G[cur_node])):
             if G[cur_node][i] not in visited:
-                #Dist[cur_node,next_node]
+                # Calculate distance from source to neighbour:
                 total_distance = tt_dist + Dist["{},{}".format(int(cur_node),int(G[cur_node][i]))]
-                #Cost[cur_node,next_node]
+
+                # Calculate energy cost from source to neighbour:
+                # Note that this cost is not used in this task, as there is no energy constraint.
                 c = cost + ECost["{},{}".format(int(cur_node),int(G[cur_node][i]))]
 
-                # value is multiplied by -1 so that
-                # least priority is at the top(can be deleted from the queue first)
-                queue.append([total_distance*-1,c,cur_node,G[cur_node][i]])
+                queue.append([total_distance,c,cur_node,G[cur_node][i]])
 
     
         #-----------------------------------------------------------------------------------
