@@ -12,10 +12,10 @@ def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
     path=[]
     #visited node
     visited=[]
-    
+    cost_dict={start:0}
     while(len(queue)>0):
         
-        queue = sorted(queue)
+        queue = sorted(queue,key=lambda x:x[0])
         tt_dist,cost,parent_node,cur_node = queue.pop()
         #print("node"+cur_node)
         #save path
@@ -38,7 +38,7 @@ def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
                     parent_node=path[i][2]
 
             #Write answer to txt file
-            with open('Task2_Output.txt', 'w') as f:
+            with open('Lab 1\Task2_Output.txt', 'w') as f:
                 f.write('[ Task 2 ] Uniform Cost Search with Energy Constraint Answer:\n')
                 print('[ Task 2 ] Uniform Cost Search with Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
@@ -50,24 +50,24 @@ def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
             
             return
         #-----------------------------------------------------------------
-        if cur_node in visited:
-            continue
+        # if cur_node in visited:
+        #     continue
 
         
         
         for i in range(len(G[cur_node])):
-            if G[cur_node][i] not in visited:
-                
-                #Dist[cur_node,next_node]
-                total_distance = tt_dist + Dist["{},{}".format(int(cur_node),int(G[cur_node][i]))]
+            #Dist[cur_node,next_node]
+            total_distance = tt_dist + Dist["{},{}".format(int(cur_node),int(G[cur_node][i]))]
                 #Cost[cur_node,next_node]
-                c = cost + ECost["{},{}".format(int(cur_node),int(G[cur_node][i]))]
-
+            c = cost + ECost["{},{}".format(int(cur_node),int(G[cur_node][i]))]
+            if G[cur_node][i] not in visited or cost_dict[G[cur_node][i]]>c:
+                
                 # value is multiplied by -1 so that
                 # least priority is at the top(can be deleted from the queue first)
                 # IF Energy required exceeed limit we don't put into queue
                 if c<MaxECost:
                     queue.append([total_distance*-1,c,cur_node,G[cur_node][i]])
+                    cost_dict[G[cur_node][i]] = c
         visited.append(cur_node)
         
         #-----------------------------------------------------------------------------------

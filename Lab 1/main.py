@@ -5,10 +5,10 @@ import task3
 
 
 
-graph = open("G.json")
-cost = open("Cost.json")
-coord = open("Coord.json")
-dist = open("Dist.json")
+graph = open("Lab 1\G.json")
+cost = open("Lab 1\Cost.json")
+coord = open("Lab 1\Coord.json")
+dist = open("Lab 1\Dist.json")
 G = json.load(graph)
 Cost = json.load(cost)
 Coord = json.load(coord)
@@ -27,12 +27,12 @@ task2.UCS_EConstraint("1","50",G,Dist,Cost,287932)
 task3.Astar_EConstraint("1","50",G,Dist,Cost,287932,Coord)
 
 data1 = data2 = data3 =""
-with open('Task1_Output.txt') as fp:
+with open('Lab 1\Task1_Output.txt') as fp:
     data1 = fp.read()
-with open('Task2_Output.txt') as fp:
+with open('Lab 1\Task2_Output.txt') as fp:
     data2 = fp.read()
-with open('Task3_Output.txt') as fp:
+with open('Lab 1\Task3_Output.txt') as fp:
     data3 = fp.read()
 data  = data1 + data2 + data3
-with open ('Lab1_Output.txt', 'w') as fp:
+with open ('Lab 1\Lab1_Output.txt', 'w') as fp:
     fp.write(data)
