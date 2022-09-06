@@ -51,7 +51,7 @@ def Astar_EConstraint(start,end,G,Dist,ECost,MaxECost,Coord):
                     parent_node=path[i][0]
 
             #Write answer to txt file
-            with open('Lab 1\Task3_Output.txt', 'w') as f:
+            with open('.\Task3_Output.txt', 'w') as f:
                 print('[ Task 3 ] A* Search with Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
                 print("Shortest distance: {}".format(tt_dist) +"\n")

@@ -38,7 +38,7 @@ def UCSTask1(start,end,G,Dist,ECost):
                     parent_node=path[i][2]
 
             #Write answer to txt file
-            with open('Lab 1\Task1_Output.txt', 'w') as f:
+            with open('.\Task1_Output.txt', 'w') as f:
                 print('[ Task 1 ] Uniform Cost Search without Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
                 print("Shortest distance: {}".format(tt_dist) +"\n")

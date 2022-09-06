@@ -5,40 +5,48 @@
 
 def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
     
-    #priority queue
-    #[Total distance from start to current node,Energy cost of the node,Parent node index,Current Node index]
+    # Priority queue
+    # The priority queue contains arrays that store information regarding a node:
+    # - Total distance from start to the node
+    # - Energy cost of the node (Always 0 for Task 1)
+    # - Parent node index
+    # - Current node index    
     queue=[[0,0,-1,start]]
-    #shortest path memory
+
+    # Shortest path memory: Stores the shortest path
     path=[]
-    #visited node
+
+    # Visited nodes: Stores the index of the visited nodes
     visited=[]
+
+    # Cost dictionary: Stores the least cost known to reach a visited node
     cost_dict={start:0}
+
     while(len(queue)>0):
         
+        # Sort based on the queue total distance (index 0) and pop the first node with highest priority (Shortest distance from source):  
         queue = sorted(queue,key=lambda x:x[0])
-        tt_dist,cost,parent_node,cur_node = queue.pop()
-        #print("node"+cur_node)
-        #save path
-        #print("len queue"+str(len(queue)))
+        tt_dist,cost,parent_node,cur_node = queue.pop(0) # Obtain info about the popped node
+
+        # Add node to path memory:
         path.append([tt_dist,cost,parent_node,cur_node])
 
-        tt_dist *= -1
-        
-
         #------------------------------------------------------------------
-        #print(cur_node==end)
+
+        # Goal Reached:
         if(cur_node==end):
             
             pathString=end
-
+            
+            # Start back tracking steps from end node and build the path string: 
             for i in range (len(path)-1,-1,-1):
                 if path[i][3] == parent_node:
                     # String format= parent node+parent node +......+end
                     pathString = parent_node+ "->" + pathString
                     parent_node=path[i][2]
 
-            #Write answer to txt file
-            with open('Lab 1\Task2_Output.txt', 'w') as f:
+            #Write answer to txt file f:
+            with open('.\Task2_Output.txt', 'w') as f:
                 f.write('[ Task 2 ] Uniform Cost Search with Energy Constraint Answer:\n')
                 print('[ Task 2 ] Uniform Cost Search with Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
@@ -56,17 +64,15 @@ def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
         
         
         for i in range(len(G[cur_node])):
-            #Dist[cur_node,next_node]
+            # Calculate distance from source to neighbour: 
             total_distance = tt_dist + Dist["{},{}".format(int(cur_node),int(G[cur_node][i]))]
-                #Cost[cur_node,next_node]
+
+            # Calculate energy cost from source to neighbour: 
             c = cost + ECost["{},{}".format(int(cur_node),int(G[cur_node][i]))]
             if G[cur_node][i] not in visited or cost_dict[G[cur_node][i]]>c:
-                
-                # value is multiplied by -1 so that
-                # least priority is at the top(can be deleted from the queue first)
-                # IF Energy required exceeed limit we don't put into queue
+                # If Energy required exceeed the limit, we do not put into queue
                 if c<MaxECost:
-                    queue.append([total_distance*-1,c,cur_node,G[cur_node][i]])
+                    queue.append([total_distance,c,cur_node,G[cur_node][i]])
                     cost_dict[G[cur_node][i]] = c
         visited.append(cur_node)
         
