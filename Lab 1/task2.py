@@ -8,7 +8,7 @@ def UCS_EConstraint(start,end,G,Dist,ECost,MaxECost):
     # Priority queue
     # The priority queue contains arrays that store information regarding a node:
     # - Total distance from start to the node
-    # - Energy cost of the node (Always 0 for Task 1)
+    # - Energy cost of the node
     # - Parent node index
     # - Current node index    
     queue=[[0,0,-1,start]]

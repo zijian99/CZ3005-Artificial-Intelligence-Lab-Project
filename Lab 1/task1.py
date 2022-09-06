@@ -11,7 +11,7 @@ def UCSTask1(start,end,G,Dist,ECost):
     # Priority queue
     # The priority queue contains arrays that store information regarding a node:
     # - Total distance from start to the node
-    # - Energy cost of the node (Always 0 for Task 1)
+    # - Energy cost of the node
     # - Parent node index
     # - Current node index
     queue=[[0,0,-1,start]]
@@ -44,7 +44,7 @@ def UCSTask1(start,end,G,Dist,ECost):
                     pathString = parent_node+ "->" + pathString
                     parent_node=path[i][2]
 
-            #Write answer to txt file f:
+            # Write answer to txt file f:
             with open('.\Task1_Output.txt', 'w') as f:
                 print('[ Task 1 ] Uniform Cost Search without Energy Constraint Answer:\n')
                 print("Shortest path: " +pathString +"\n")
