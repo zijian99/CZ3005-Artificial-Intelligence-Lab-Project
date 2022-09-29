@@ -2,7 +2,7 @@ import json
 import task1
 import task2
 import task3
-
+import timeit
 
 
 graph = open(".\G.json")
@@ -22,9 +22,15 @@ Dist = json.load(dist)
 # dist,cost,parent ,node = queue.pop()
 # print(dist)
 #print(1==1)
-task1.UCSTask1("1","50",G,Dist,Cost)
-task2.UCS_EConstraint("1","50",G,Dist,Cost,287932)
-task3.Astar_EConstraint("1","50",G,Dist,Cost,287932,Coord)
+print("----------------------------")
+print("Running task 1, please wait.")
+task1_time = timeit.timeit("task1.UCSTask1(\"1\",\"50\",G,Dist,Cost)", number=1, globals=locals())
+print("----------------------------")
+print("Running task 2, please wait. (This may take a while)")
+task2_time = timeit.timeit("task2.UCS_EConstraint(\"1\",\"50\",G,Dist,Cost,287932)", number=1, globals=locals())
+print("----------------------------")
+print("Running task 3, please wait.")
+task3_time = timeit.timeit("task3.Astar_EConstraint(\"1\",\"50\",G,Dist,Cost,287932,Coord)", number=1, globals=locals())
 
 data1 = data2 = data3 =""
 with open('.\Task1_Output.txt') as fp:
@@ -36,3 +42,9 @@ with open('.\Task3_Output.txt') as fp:
 data  = data1 + data2 + data3
 with open ('.\Lab1_Output.txt', 'w') as fp:
     fp.write(data)
+
+print("----------------------------")
+print("Execution Time Summary:\n")
+print("Task 1: "+str(task1_time)+" seconds\n")
+print("Task 2: "+str(task2_time)+" seconds\n")
+print("Task 3: "+str(task3_time)+" seconds\n")
