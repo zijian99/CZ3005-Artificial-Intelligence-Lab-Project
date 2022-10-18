@@ -7,15 +7,16 @@ company(appy).
 
 /*sumsum is competitor of appy*/
 competitor(sumsum,appy).
-competitor(Y,X):-competitor(X,Y).
+/*competitor(Y,X):-
+	competitor(X,Y).*/
 
 /*if company is competitor then they are rival*/
 rival(X,Y):-
 	competitor(X,Y).
 
 /*rival and competitor with each other*/
-rival(Y,X):-
-	rival(X,Y).
+/*rival(Y,X):-
+	rival(X,Y).*/
 
 
 
@@ -42,6 +43,7 @@ business(X):-
 unethical(X):-
 	boss(X),
 	steal(X,Y),
+	business(Y),
 	develop(A,Y),
 	works(X,B),
-	rival(A,B).
+	(rival(A,B);rival(B,A)).
