@@ -11,8 +11,8 @@ competitor(sumsum,appy).
 	competitor(X,Y).*/
 
 /*if company is competitor then they are rival*/
-rival(X,Y):-
-	competitor(X,Y).
+rival(X,appy):-
+	competitor(X,appy).
 
 /*rival and competitor with each other*/
 /*rival(Y,X):-
