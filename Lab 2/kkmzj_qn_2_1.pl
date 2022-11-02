@@ -43,34 +43,19 @@ olderThan(A,B) :-
 	isOlder(A,C),
 	isOlder(C,B).
 
-/*Order of precedence*/
+/*Order of precedence, prince come before princess and all order based on decreasing order of age*/
 precedes(X,Y):-prince(X),princess(Y).
 precedes(X,Y) :-prince(X), prince(Y), olderThan(X,Y).
 precedes(X,Y) :-princess(X), princess(Y), olderThan(X,Y).
 
 
-
+/*Succession Sort*/ 
 insert(A,[B|C],[B|D]):-not(precedes(A,B)),!,insert(A,C,D).
 insert(A,C,[A|C]).
 succession_sort([A|B],SortList):-succession_sort(B,Tail),insert(A,Tail,SortList).
 succession_sort([],[]).
 
+/*Succession List*/
 successionList(SuccessionList):-findall(Y,offspring(Y,_),ChildNodes),succession_sort(ChildNodes,SuccessionList).
 
-
-
-
-
-/*successors(X, Y) :- insert_sort(X, Y).
-
-insert_sort(X, Y) :- i_sort(X, [], Y).
-i_sort([], Acc, Acc).
-i_sort([H|T], Acc, Y) :- insert(H, Acc, NewAcc), i_sort(T, NewAcc, Y).
-
-insert(X, [], [X]).
-insert(X, [Y|T], [X, Y|T]) :- precedes(X, Y).
-insert(X, [Y|T], [Y|NewT]) :- not(precedes(X, Y)), insert(X, T, NewT).
-
-oldRoyalSuccession(OldRoyalSuccession):- findall(Y,offspring(Y,_), Offsprings), successors(Offsprings,OldRoyalSuccession).
-*/
 
