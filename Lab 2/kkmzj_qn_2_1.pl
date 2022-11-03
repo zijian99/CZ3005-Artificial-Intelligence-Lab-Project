@@ -46,7 +46,7 @@ olderThan(A,C) :-
 	isOlder(A,B),
 	isOlder(B,C).
 
-/*Order of precedence*/
+/*Order of precedence, prince come before princess and all order based on decreasing order of age*/
 precedes(X,Y):-prince(X),princess(Y).
 precedes(X,Y) :-prince(X), prince(Y), olderThan(X,Y).
 precedes(X,Y) :-princess(X), princess(Y), olderThan(X,Y).
@@ -58,6 +58,7 @@ insert(A,C,[A|C]).
 succession_sort([A|B],SortList):-succession_sort(B,Tail),insert(A,Tail,SortList).
 succession_sort([],[]).
 
+/*Succession List*/
 successionList(SuccessionList):-findall(Y,offspring(Y,_),ChildNodes),succession_sort(ChildNodes,SuccessionList).
 
 /*Approach 2: Logical expression*/

@@ -53,6 +53,7 @@ insert(A,C,[A|C]).
 succession_sort([A|B],SortList):-succession_sort(B,Tail),insert(A,Tail,SortList).
 succession_sort([],[]).
 
+/*Succession List*/
 successionList(SuccessionList):-findall(Y,offspring(Y,_),ChildNodes),succession_sort(ChildNodes,SuccessionList).
 
 /*Approach 2: Logical expression*/
