@@ -3,7 +3,8 @@ male(charles).
 male(andrew).
 male(edward).
 
-/*female (Elizabeth is omitted for Approach 2)*/
+/*female*/
+female(elizabeth).
 female(ann).
 
 /*elizabeth has four offspring*/
@@ -11,9 +12,6 @@ offspring(charles,elizabeth).
 offspring(andrew,elizabeth).
 offspring(edward,elizabeth).
 offspring(ann,elizabeth).
-
-/*List of elizabeth's children in order of birth*/
-children([charles, ann, andrew, edward]).
 
 /*elizabeth is queen*/
 queen(elizabeth).
@@ -60,6 +58,3 @@ succession_sort([],[]).
 
 /*Succession List*/
 successionList(SuccessionList):-findall(Y,offspring(Y,_),ChildNodes),succession_sort(ChildNodes,SuccessionList).
-
-/*Approach 2: Logical expression*/
-successor(N):- ((male(K),not(female(N)),children(L), member(X, L), not(N=X), olderThan(N,X), (K=X)); (female(K), children(L), not(N=K), member(X, L), (K=X))) -> print(K),nl,successor(K).
