@@ -45,10 +45,10 @@ completeness.” (1979).
 
 Lab 2 involves exercises to specify each of them as a declarative knowledge base in Prolog.
 
-## Exercise 1: 
+## Exercise 1
 The Smart Phone Rivalry
 
-## Exercise 2: 
+## Exercise 2
 The Royal Family
 
 
