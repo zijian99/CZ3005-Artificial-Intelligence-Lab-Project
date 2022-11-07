@@ -39,3 +39,17 @@ The final A* cost function is of the form f(n) = g(n) + h(n), where g(n) is the 
 completeness.” (1979).  
 [2] Bogomolny, A., n.d. The Distance Formula. [online] Cut-the-knot.org. Available at: <https://www.cut-the-knot.org/pythagoras/DistanceFormula.shtml> [Accessed 7 September 2022].
 
+
+
+# Lab 2
+
+Lab 2 involves exercises to specify each of them as a declarative knowledge base in Prolog.
+
+## Exercise 1: 
+The Smart Phone Rivalry
+
+## Exercise 2: 
+The Royal Family
+
+
+
